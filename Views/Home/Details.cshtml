@@ -1,0 +1,21 @@
+﻿@model HomeDetailsViewModel
+
+
+		<h3>
+			@Model.PageTitle
+		</h3>
+
+		
+
+<div class="card" style="width: 18rem;">
+	<img src="~/images/image.png" class="card-img-top" alt="..."
+	asp-append-version="true">
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">ID : @Model.Employee.Id</li>
+		<li class="list-group-item">Name :@Model.Employee.Name</li>
+		<li class="list-group-item">Name :@Model.Employee.Email</li>
+		<li class="list-group-item">Department : @Model.Employee.Department</li>
+	</ul>
+	<a asp-controller="home" asp-action="Index" >back go index</a>
+	
+</div>
