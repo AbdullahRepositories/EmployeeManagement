@@ -9,9 +9,9 @@ namespace EmployeeManagement.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IEmployeeRepository _employeeRepository;
-        public HomeController(ILogger<HomeController> logger,IEmployeeRepository employeeRepository)
+        public HomeController(ILogger<HomeController> logger, IEmployeeRepository employeeRepository)
         {
-            _employeeRepository=employeeRepository;
+            _employeeRepository = employeeRepository;
             _logger = logger;
         }
 
@@ -35,7 +35,7 @@ namespace EmployeeManagement.Controllers
                 Employee = _employeeRepository.GetEmployee(id),
                 PageTitle = "Employee Details"
             };
-           
+
             return View(homeDetailsViewModel);
         }
 
@@ -48,9 +48,12 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
-            Employee newEmployee=_employeeRepository.Add(employee);
-            return RedirectToAction("details",new { id = newEmployee.Id });
+            if (ModelState.IsValid) { 
+            Employee newEmployee = _employeeRepository.Add(employee);
+            return RedirectToAction("details", new { id = newEmployee.Id });
         }
+            return View();
+                                    }
         public IActionResult Privacy()
         {
             return View();

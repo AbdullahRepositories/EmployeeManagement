@@ -7,10 +7,12 @@
   <div>
     <label asp-for="Name"></label>
     <input  asp-for="Name"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div>
     <label asp-for="Email"></label>
     <input  asp-for="Email"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div>
     <label asp-for="Department"></label>
