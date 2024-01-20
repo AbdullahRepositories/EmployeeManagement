@@ -1,4 +1,5 @@
 ﻿@model Employee
+@inject IEmployeeRepository _empRepository
 @{
     ViewData["Title"] = "Create Employee";
 }
@@ -27,6 +28,9 @@
     </div>
     <div>
         <button type="submit"> Create</button>
+    </div>
+    <div>
+        <h5>Total Employees Count = @_empRepository.GetAllEmployee().Count()</h5>
     </div>
 </form>
 

@@ -7,10 +7,10 @@ namespace EmployeeManagement.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(50,ErrorMessage ="Name Cannot exeed 50 characters")]
-        public string Name { get; set; }
+        public string Name { get; set; }  
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage ="Invalid Email Format")]
-        [Display(Name = "Office Email")]
+        [Display(Name = "Office Email")] 
         public string Email{ get; set; }
         /// <summary>
         /// by adding the required annotation for enums, it wouldnot work as enums already have default values. which means if you add other values than the specified ones in the num attributes, it would pop  an exception.
