@@ -6,9 +6,9 @@
 <div class="row">
 			@foreach (var employee in Model)
 			{
-
-			<div class="card" style="width: 18rem;">
-				<img src="~/images/image.png" class="card-img-top" alt="..." asp-append-version="true">
+		var photoPath = "~/images/" + (employee.PhotoPath ?? "noimage.png");
+			<div class="card" style="min-width: 18rem;max-width:25.5%;">
+			<img src="@photoPath" class="card-img-top imageThumbnail" alt="..." asp-append-version="true">
 				<ul class="list-group list-group-flush"> n
 					<li class="list-group-item">ID :@employee.Id</li>
 

@@ -1,6 +1,8 @@
 ﻿@model HomeDetailsViewModel
 
-
+@{
+	var photoPath = "~/images/" + (Model.Employee.PhotoPath ?? "noimage.png");
+}
 		<h3>
 			@Model.PageTitle
 		</h3>
@@ -8,7 +10,7 @@
 		
 
 <div class="card" style="width: 18rem;">
-	<img src="~/images/image.png" class="card-img-top" alt="..."
+	<img src="@photoPath" class="card-img-top" alt="..."
 	asp-append-version="true">
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">ID : @Model.Employee.Id</li>

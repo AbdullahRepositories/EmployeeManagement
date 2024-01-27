@@ -1,4 +1,5 @@
 using EmployeeManagement.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 namespace EmployeeManagement
@@ -15,13 +16,15 @@ namespace EmployeeManagement
         {
             var builder = WebApplication.CreateBuilder(args);
 
+           
             // Add services to the container.
             builder.Services.AddControllersWithViews();//.AddXmlSerializerFormatters();
-
+            builder.Services.AddDbContextPool<AppDbContext>(
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
             ///making the IEmployeeRepository implemnted By MockEmployeeRepositroy
             ///as a service, so that it's implemented once in here as singleton
 
-            builder.Services.AddSingleton<IEmployeeRepository,MockEmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeRepository,SQLEmployeeRepository>();
 
             var app = builder.Build();
 
