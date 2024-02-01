@@ -18,6 +18,7 @@
 				</ul>
 				<div class="card-body">
 				<a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary">show</a>
+				<a asp-controller="home" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-primary">Edit</a>
 				@* <a href="@Url.Action("details","home",new {id=employee.Id})" 
 				class="btn btn-primary">show</a>
 				    @Html.ActionLink("View","details","home",new {id=employee.Id})
