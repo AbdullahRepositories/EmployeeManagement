@@ -1,9 +1,12 @@
-﻿namespace EmployeeManagement.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EmployeeManagement.ViewModels
 {
     public class EmployeeEditViewModel:EmployeeCreateViewModel
     {
-      public  int Id;
-       public string ExistingPhotoPath;
+       
+      public  int Id { get; set; }
+       public string? ExistingPhotoPath { get; set; }
 
     }
 }

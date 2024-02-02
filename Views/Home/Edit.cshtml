@@ -6,16 +6,16 @@
 
 }
 
-<form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post">
-    <input hidden asp-for="Id" />
-    <input hidden asp-for="ExistingPhotoPath"  />
+<form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input  hidden asp-for="Id" />
+    <input hidden  asp-for="ExistingPhotoPath" />
     <div>
         <label asp-for="Name"></label>
-        <input asp-for="Name" />
+        <input  asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="Email"></label>
+         <label asp-for="Email"></label>
         <input asp-for="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>

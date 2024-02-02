@@ -19,6 +19,6 @@
 		<li class="list-group-item">Department : @Model.Employee.Department</li>
 	</ul>
 	<a asp-controller="home" asp-action="Index" >back go index</a>
-	<a asp-controller="home" asp-action="Edit"  >Edit</a>
+	<a asp-controller="home" asp-action="Edit" asp-route-id="@Model.Employee.Id"  >Edit</a>
 	
 </div>

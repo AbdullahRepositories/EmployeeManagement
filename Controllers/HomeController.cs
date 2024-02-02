@@ -32,9 +32,15 @@ namespace EmployeeManagement.Controllers
         }
         public ViewResult Details(int id)
         {
+            Employee employee =_employeeRepository.GetEmployee(id);
+            if (employee is null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new()
             { 
-                Employee = _employeeRepository.GetEmployee(id),
+                Employee = employee,
                 PageTitle = "Employee Details"
             };
 
@@ -85,6 +91,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
+            //throw new Exception(" in edit exiption");
             if (ModelState.IsValid)
             {
                 Employee employee = _employeeRepository.GetEmployee(model.Id);
@@ -103,7 +110,7 @@ namespace EmployeeManagement.Controllers
                 }
 
                _employeeRepository.Update(employee);
-                return RedirectToAction("index");
+                return RedirectToAction("Index");
 
             }
             return View();
