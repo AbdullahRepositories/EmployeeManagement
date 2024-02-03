@@ -5,7 +5,15 @@ namespace EmployeeManagement.Controllers
 {
     public class ErrorController : Controller
     {
-        [Route("Error/{statusCode}")]
+		public ILogger<ErrorController> _logger { get; }
+		public ErrorController(ILogger<ErrorController> logger)
+        {
+			_logger = logger;
+		}
+
+		
+
+		[Route("Error/{statusCode}")]
 
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
@@ -14,8 +22,10 @@ namespace EmployeeManagement.Controllers
             {
                 case 404:
                     ViewBag.ErrorMessage = "Sorry, the resource you requisted could not be found";
-                    ViewBag.Path = statusCodeResult.OriginalPath;
-                    ViewBag.QueryString = statusCodeResult.OriginalQueryString;
+                    _logger.LogWarning($"404 Error Occured. Path={statusCodeResult.OriginalPath}" +
+                        $"and QueryString ={statusCodeResult.OriginalQueryString}");
+                    //ViewBag.Path = statusCodeResult.OriginalPath;
+                    //ViewBag.QueryString = statusCodeResult.OriginalQueryString;
                     break;
                 default:
                     break;

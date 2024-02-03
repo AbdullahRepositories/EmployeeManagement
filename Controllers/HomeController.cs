@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -91,7 +92,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
-            //throw new Exception(" in edit exiption");
+            throw new Exception(" in edit exiption");
             if (ModelState.IsValid)
             {
                 Employee employee = _employeeRepository.GetEmployee(model.Id);
@@ -141,6 +142,8 @@ namespace EmployeeManagement.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            var exceptionDetails=HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            _logger.LogError($"The path{exceptionDetails.Path} threw an exception {exceptionDetails.Error}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
