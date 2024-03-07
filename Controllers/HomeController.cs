@@ -33,7 +33,16 @@ namespace EmployeeManagement.Controllers
         }
         public ViewResult Details(int id)
         {
-            Employee employee =_employeeRepository.GetEmployee(id);
+            _logger.LogTrace("Trace log");
+            _logger.LogCritical("Critical log");
+            _logger.LogInformation("Information log");
+            _logger.LogError("Error log");
+            _logger.LogWarning("Warning log");
+            _logger.LogDebug("Debug log");
+           
+
+            _logger.LogTrace("Trace log");
+			Employee employee =_employeeRepository.GetEmployee(id);
             if (employee is null)
             {
                 Response.StatusCode = 404;
@@ -73,6 +82,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
+
             if (ModelState.IsValid) {
                 string uniqeFileName = ProcessUploadFile(model);
                 Employee newEmployee = new()
@@ -92,7 +102,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
-            throw new Exception(" in edit exiption");
+            //throw new Exception(" in edit exiption");
             if (ModelState.IsValid)
             {
                 Employee employee = _employeeRepository.GetEmployee(model.Id);

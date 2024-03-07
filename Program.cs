@@ -1,5 +1,8 @@
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 using System.Reflection.Metadata;
 
 namespace EmployeeManagement
@@ -12,18 +15,25 @@ namespace EmployeeManagement
         {
                     _config=config;
         }
+
+
+
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-
            
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();//.AddXmlSerializerFormatters();
+			var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+			logger.Debug("init main");
+			var builder = WebApplication.CreateBuilder(args);
+
+			builder.Logging.ClearProviders();
+			builder.Host.UseNLog();
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();//.AddXmlSerializerFormatters();
             builder.Services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
             ///making the IEmployeeRepository implemnted By MockEmployeeRepositroy
             ///as a service, so that it's implemented once in here as singleton
-
+            //builder.Services.AddIdentity<IdentityUser, IdentityRole>();
             builder.Services.AddScoped<IEmployeeRepository,SQLEmployeeRepository>();
 
             var app = builder.Build();
