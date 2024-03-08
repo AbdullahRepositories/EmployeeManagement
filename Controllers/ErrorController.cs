@@ -28,6 +28,8 @@ namespace EmployeeManagement.Controllers
                     //ViewBag.QueryString = statusCodeResult.OriginalQueryString;
                     break;
                 default:
+                    ViewBag.ErrorMessage = "Sorry, the resource you requisted could not be found";
+
                     break;
             }
             return View("NotFound");
