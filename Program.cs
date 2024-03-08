@@ -31,9 +31,10 @@ namespace EmployeeManagement
 			builder.Services.AddControllersWithViews();//.AddXmlSerializerFormatters();
             builder.Services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
-            ///making the IEmployeeRepository implemnted By MockEmployeeRepositroy
+             ///making the IEmployeeRepository implemnted By MockEmployeeRepositroy
             ///as a service, so that it's implemented once in here as singleton
-            //builder.Services.AddIdentity<IdentityUser, IdentityRole>();
+          builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+					.AddEntityFrameworkStores<AppDbContext>();
             builder.Services.AddScoped<IEmployeeRepository,SQLEmployeeRepository>();
 
             var app = builder.Build();
@@ -61,7 +62,7 @@ namespace EmployeeManagement
 
             app.UseRouting();
 
-
+            app.UseAuthentication();
             app.UseAuthorization();
              
             app.MapControllerRoute(
