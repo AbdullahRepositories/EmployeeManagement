@@ -33,14 +33,25 @@ namespace EmployeeManagement
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
              ///making the IEmployeeRepository implemnted By MockEmployeeRepositroy
             ///as a service, so that it's implemented once in here as singleton
-          builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-					.AddEntityFrameworkStores<AppDbContext>();
+          builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+          {
+              options.Password.RequiredLength = 10;
+              options.Password.RequiredUniqueChars = 3;
+              options.Password.RequireNonAlphanumeric = false;
+          }).AddEntityFrameworkStores<AppDbContext>();
+
+            //builder.Services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequiredLength = 10;
+            //    options.Password.RequiredUniqueChars = 3;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //});
             builder.Services.AddScoped<IEmployeeRepository,SQLEmployeeRepository>();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
 
                 //app.UseDeveloperExceptionPage();
